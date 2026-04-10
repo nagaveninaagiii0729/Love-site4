@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nagaveni ❤️ Kushal</title>
+
+<style>
+body {
+    margin:0;
+    background:black;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
+
+/* slides */
+.slide {
+    display:none;
+    height:100vh;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+}
+
+.active {
+    display:flex;
+}
+
+/* images */
+img {
+    width:220px;
+    border-radius:15px;
+    margin-top:15px;
+}
+
+/* video */
+video {
+    width:300px;
+    border-radius:15px;
+}
+
+/* button */
+button {
+    padding:12px 25px;
+    border-radius:25px;
+    border:none;
+    background:pink;
+    font-size:18px;
+}
+
+/* hearts */
+.heart {
+    position:fixed;
+    color:red;
+    animation:float 5s linear infinite;
+}
+@keyframes float {
+    0% { transform: translateY(100vh); }
+    100% { transform: translateY(-10vh); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- START -->
+<div id="startScreen">
+    <h1>Click to Start ❤️</h1>
+    <button onclick="start()">Start</button>
+</div>
+
+<!-- MUSIC -->
+<audio id="music" loop>
+    <source src="music.mp3">
+</audio>
+
+<!-- SLIDES -->
+
+<div class="slide" id="s1"><h1>Nagaveni ❤️ Kushal</h1></div>
+
+<div class="slide" id="s2">
+    <h1>🌹 Bouquet</h1>
+    <p>💐 🌷 🌹 🌸 🌺 🌼 💖</p>
+</div>
+
+<div class="slide" id="s3">
+    <h1>💌 My Love</h1>
+    <p>It all started on Dec 26, 2022 ❤️<br><br>
+    You are my happiness 🥺</p>
+</div>
+
+<div class="slide" id="s4">
+    <h1>🤝 First Hand Hold</h1>
+    <img src="handhold.jpg">
+</div>
+
+<div class="slide" id="s5">
+    <h1>💖 Proposal</h1>
+    <img src="proposal.jpg">
+</div>
+
+<div class="slide" id="s6">
+    <h1>📸 Memories</h1>
+    <img id="pic" src="pic1.jpg">
+</div>
+
+<div class="slide" id="s7">
+    <h1>💍 Stay with me forever?</h1>
+    <button onclick="alert('I love you Kushal ❤️')">YES ❤️</button>
+</div>
+
+<div class="slide" id="s8">
+    <h1>🎥 Our Video</h1>
+    <video controls>
+        <source src="love.mp4">
+    </video>
+</div>
+
+<div class="slide" id="s9">
+    <h1>Made with love ❤️</h1>
+</div>
+
+<script>
+let current = 1;
+let total = 9;
+
+/* START */
+function start() {
+    document.getElementById("startScreen").style.display="none";
+
+    let music = document.getElementById("music");
+    if (music) music.play().catch(()=>{});
+
+    showSlide();
+}
+
+/* SLIDES (SLOW NOW) */
+function showSlide() {
+    document.querySelectorAll(".slide").forEach(s => s.classList.remove("active"));
+
+    let slide = document.getElementById("s"+current);
+    if (slide) slide.classList.add("active");
+
+    current++;
+    if (current <= total) {
+        setTimeout(showSlide, 8000);  // ⬅️ slower (8 sec)
+    }
+}
+
+/* PHOTO SLIDESHOW (ALL PICS) */
+let images = [
+"pic1.jpg",
+"pic2.jpg",
+"pic3.jpg",
+"pic4.jpg",
+"pic5.jpg",
+"pic6.jpg"
+];
+
+let i = 0;
+
+setInterval(()=>{
+    let img = document.getElementById("pic");
+    if (img) {
+        i = (i+1)%images.length;
+        img.src = images[i];
+    }
+},3000);
+
+/* HEARTS */
+setInterval(()=>{
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),5000);
+},300);
+</script>
+
+</body>
+</html>
